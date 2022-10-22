@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "ASP.NET Core MVC URL Shortener";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+
+
+<blockquote contenteditable="@ViewContext.HttpContext.User.IsInRole("admin")">
+    <p>A basic implementation of an URL shortener web application using ASP.NET Core MVC and Entity Framework Core.</p>
+
+    <h2>
+
+        <h3>Algorithm</h3>
+
+        <p>So, how works an URL shortener?</p>
+
+        <p>
+            When we store the URL in database, we add a new randomly genereted string as new short URL and add it to the end of short path.
+            When we need to redirect user to real URL we search the short one in database and use its original URL to redirection.
+        </p>
+
+    </h2>
+</blockquote>

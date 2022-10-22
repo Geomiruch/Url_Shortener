@@ -1,0 +1,48 @@
+﻿@model IEnumerable<URLShortener.Models.URLModel>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>List</h1>
+
+<p>
+    @if (ViewContext.HttpContext.User.IsInRole("admin") || ViewContext.HttpContext.User.IsInRole("user"))
+    {
+        <a asp-action="Create">Add new URL</a>
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.URL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OriginalURL)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a asp-controller="Home" asp-action="RedirectTo" asp-route-path="@item.URL">
+                    http://localhost:44323/Home/RedirectTo/@item.URL
+                </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OriginalURL)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                @if (ViewContext.HttpContext.User.IsInRole("admin") || ViewContext.HttpContext.User.IsInRole("user"))
+                {
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
